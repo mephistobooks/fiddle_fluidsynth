@@ -17,7 +17,8 @@ As for the default soundfont, I recommend GeneralUser GS 2.0.2 (`GeneralUser-GS.
 
 [FluidR3 GM](https://musical-artifacts.com/artifacts/738) soundfont by Frank Wen and Toby Smithe is also great. We can download them on [Musical Artifact](https://musical-artifacts.com/).
 
-Other soundfont resources are listed in the FluidSynth User Manual Wiki, [SoundFont](https://github.com/FluidSynth/fluidsynth/wiki/SoundFont) chapter.
+Other soundfont resources are listed in the [FluidSynth User Manual Wiki](https://github.com/FluidSynth/fluidsynth/wiki/UserManual), [SoundFont](https://github.com/FluidSynth/fluidsynth/wiki/SoundFont) chapter.
+
 
 ## Developed Environment
 
@@ -30,18 +31,16 @@ Developed/Tested environments are as follows:
 
 ## Installation
 
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
-
 Install the gem and add to the application's Gemfile by executing:
 
 ```bash
-bundle add UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+bundle add fiddle_fluidsynth
 ```
 
 If bundler is not being used to manage dependencies, install the gem by executing:
 
 ```bash
-gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+gem install fiddle_fluidsynth
 ```
 
 
@@ -62,8 +61,6 @@ The Structure of classes/modules is:
     - (class/)instance methods are defined. These are almost one-to-one
       mapping with C-functions, but little bit ruby-fied.
     - utility methods for shortcuts.
-    - ~~`FiddleFluidSynth#object` (this might be removed...?)
-        the method for referencing to the instance hierarchy~~.
 - FiddleFluidSynth::C (module)   direct mapping for C-functions.
 
 
