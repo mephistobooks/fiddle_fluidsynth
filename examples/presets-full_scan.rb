@@ -2,8 +2,11 @@
 #
 #
 
-# List all presets (full-scan version).
+# presets-full_scan.rb  - list all presets (full-scan version).
+# traverse all presets in the bank number x program number space.
 #
+# This code is in the public domein.
+# [YAMAMOTO, Masayuki]
 #
 
 require_relative '../lib/fiddle_fluidsynth'
@@ -27,13 +30,15 @@ puts "sfid_ary: #{fs.sfid_ary}"
 
 #
 fs.sfonts.each_with_index do |sfont, _i|
-  name = fs.sfont_get_name(sfont)
+  #name = fs.sfont_get_name(sfont)
+  name = sfont.name
   puts "#{_i+1}. sfont: #{name}" +
     " (sfont instance addr: 0x#{sfont.to_i.to_s(16)})"
 
   #
   for bknum in fs.bknum_range_whole
     for pgnum in fs.pgnum_range_whole
+      #_preset = fs.sfont_get_preset(sfont, bknum: bknum, prenum: pgnum)
       _preset = fs.sfont_get_preset(sfont, bknum: bknum, prenum: pgnum)
 
       if !(_preset.null?)

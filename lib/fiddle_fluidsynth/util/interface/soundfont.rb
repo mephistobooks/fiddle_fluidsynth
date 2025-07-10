@@ -46,34 +46,64 @@ module FiddleFluidSynth::Interface
     end
 
     #
+    # ==== Args
+    # bknum:: bank number.
+    # prenum:: preset number.
+    # ==== Returns
+    # nil or Preset instance.
     def preset( bknum: , prenum: , _self: self.itself )
       FFS.sfont_get_preset(_self, bknum: bknum, prenum: prenum)
     end
 
+    #
     def preset_iter_reset( _self: self.itself )
       FFS.sfont_iteration_start(_self)
     end
 
-    def each_preset( _self: self.itself, &blk )
-      self.preset_iter_reset()
-
-      cnt  = 0
-      # preset = self.sfont_iteration_next(_self)
-      # cnt += 1
-
+    def each_preset( _self: self.itself, debug_f: false, &blk )
+      #
+      # self.preset_iter_reset()
+      self.preset_iter_reset(_self: _self)
       preset = nil
-      until (preset = FFS.sfont_iteration_next(_self))&.null?
+      cnt    = 0
+      $stderr.puts "{#{__method__}} cnt: #{cnt}," +
+        " preset: #{preset.inspect}"  if debug_f
+
+
+      # until (preset = FFS.sfont_iteration_next(_self))&.null?
+      # while (preset = FFS.sfont_iteration_next(_self))  # ok.
+      #
+      #ng. while (preset = FFS.sfont_iteration_next(_self),
+      #        #(preset && !preset.null?))
+      #        (preset))
+      #ng. while ((preset = FFS.sfont_iteration_next(_self)),
+      #        (preset && !preset.null?))
+      #ng. while (preset = FFS.sfont_iteration_next(_self)),
+      #    (preset && !preset.null?)
+
+      while [preset = FFS.sfont_iteration_next(_self),
+          (preset && !preset.null?)].last
+
+        $stderr.puts "{#{__method__}} cnt: #{cnt}," +
+          " preset: #{preset.inspect}:#{preset.class}," +
+          " null?: #{preset.null?}" if debug_f
+
         blk.(preset)
-        # preset = self.sfont_iteration_next(_self)
         cnt += 1
       end
+      $stderr.puts "{#{__method__}} LAST: cnt: #{cnt}," +
+        " preset: #{preset.inspect}:#{preset.class}" if debug_f
+
       cnt
     end
+    alias preset_iter each_preset
 
-    def presets( _self: self.itself )
+    def presets( _self: self.itself, debug_f: false )
       ret = []
 
-      self.each_preset{|pres| ret << pres }
+      self.each_preset(debug_f: debug_f){|pres| ret << pres }
+      $stderr.puts "{#{__method__}} ret (#{ret.size}):" +
+        " #{ret.first.name} - #{ret.last.name}" if debug_f
       ret
     end
     alias all_presets presets

@@ -258,11 +258,23 @@ class FiddleFluidSynth
   module SoundFontsLoaderIF
 
     #
+    # ==== See Also
+    # - `#preset_get_sfont()`
+    # - synth/soundfont_management.rb:`#synth_get_sfont()`
+    # - synth/soundfont_management.rb:`#synth_get_sfont_by_id()`
+    # - synth/soundfont_management.rb:`#synth_get_sfont_by_name()`
+    #
     # def sfont_new( get_name: , get_preset: , iter_start: , iter_next: , free: )
     def sfont_new( get_name: nil, get_preset: nil,
                    iter_start: nil, iter_next: nil, free: nil )
-      ret = C.new_fluid_sfont(get_name, get_preset, iter_start, iter_next, free)
-      ret.extend(Interface::SoundFont)
+      ret = C.new_fluid_sfont(
+              get_name, get_preset, iter_start, iter_next, free)
+      #ng. if ret.null? || ret.nil?
+      if ret.nil? || ret.null?
+        ret = nil
+      else
+        ret.extend(Interface::SoundFont)
+      end
       ret
     end
     def sfont_delete( sfont )
@@ -279,13 +291,21 @@ end
 class FiddleFluidSynth
   module SoundFontsLoaderIF
 
-    # TODO. extend
+    #
+    # ==== See Also
+    # - `#sfont_get_preset()`
+    #
     def preset_new( get_name: nil, get_preset: nil,
                     iter_start: nil, iter_next: nil, noteon: nil, 
                     free: nil )
       ret = C.new_fluid_preset(
               get_name, get_preset, iter_start, iter_next, noteon, free)
-      ret.extend(Interface::SoundFont::Preset)
+      #ng. if ret.null? || ret.nil?
+      if ret.nil? || ret.null?
+        ret = nil
+      else
+        ret.extend(Interface::SoundFont::Preset)
+      end
       ret
     end
     def preset_delete( preset )
@@ -304,7 +324,12 @@ class FiddleFluidSynth
 
     def sample_new( )
       ret = C.new_fluid_sample()
-      ret.extend(Interface::SoundFont::Sample)
+      #ng. if ret.null? || ret.nil?
+      if ret.nil? || ret.null?
+        ret = nil
+      else
+        ret.extend(Interface::SoundFont::Sample)
+      end
       ret
     end
     def sample_delete( sample )
@@ -344,9 +369,17 @@ class FiddleFluidSynth
     end
 
     #
+    # ==== See Also
+    # - `#sfont_new()`
+    #
     def preset_get_sfont( preset )
       ret = C.fluid_preset_get_sfont(preset)
-      ret.extend(Interface::SoundFont)
+      #ng. if ret.null? || ret.nil?
+      if ret.nil? || ret.null?
+        ret = nil
+      else
+        ret.extend(Interface::SoundFont)
+      end
       ret
     end
     def preset_set_data( preset, data: )
@@ -419,17 +452,31 @@ class FiddleFluidSynth
       ret
     end
 
+    #
+    # ==== See Also
+    # - `#preset_new()`
+    #
     # def sfont_get_preset( sfont, bknum: , prenum: )
     def sfont_get_preset( sfont = self.sfont, bknum: , prenum:  )
       ret = C.fluid_sfont_get_preset(sfont, bknum, prenum)
-      ret.extend(Interface::SoundFont::Preset)
+      #ng. if ret.null? || ret.nil?
+      if ret.nil? || ret.null?
+        ret = nil
+      else
+        ret.extend(Interface::SoundFont::Preset)
+      end
       ret
     end
 
     #
     def sfont_iteration_next( sfont = self.sfont )
       ret = C.fluid_sfont_iteration_next(sfont)
-      ret.extend(Interface::SoundFont::Preset)
+      #ng. if ret.null? || ret.nil?
+      if ret.nil? || ret.null?
+        ret = nil
+      else
+        ret.extend(Interface::SoundFont::Preset)
+      end
       ret
     end
     def sfont_iteration_start( sfont = self.sfont )

@@ -131,7 +131,11 @@ class FiddleFluidSynth
       deprecated_msg(__method__)
       deprecated_msg_instead('sequencer_new2(0)', meth: __method__)
       ret = C.new_fluid_sequencer()
-      ret.extend(InstanceOnlyIF)
+      if ret.nil? || ret.null?
+        ret = nil
+      else
+        ret.extend(InstanceOnlyIF)
+      end
       ret
     end
 
@@ -144,7 +148,11 @@ class FiddleFluidSynth
     #
     def sequencer_new2( use_system_timer = 0 )
       ret = C.new_fluid_sequencer2(use_system_timer)
-      ret.extend(InstanceOnlyIF)
+      if ret.nil? || ret.null?
+        ret = nil
+      else
+        ret.extend(InstanceOnlyIF)
+      end
       ret
     end
 
@@ -189,7 +197,7 @@ class FiddleFluidSynth
 
     def sequencer_get_client_name( seq, seq_id: )
       ret = C.fluid_sequencer_get_client_name(seq, seq_id)
-      if ret.null?
+      if ret.nil? || ret.null?
         ret = nil
       else
         ret = ret.to_s

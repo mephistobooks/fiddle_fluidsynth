@@ -255,7 +255,45 @@ class FiddleFluidSynth::SoundFontTest
   #
   #
   #
-  test "each_preset" do
+  test "SoundFont  - #preset (get_preset)" do
+    ffs = FiddleFluidSynth.new(soundfont_name: 'GeneralUser-GS.sf2')
+
+    ret = ffs.object.soundfont.name
+    exp = /GeneralUser-GS\.sf2$/
+    assert_match exp, ret
+
+    #
+    ret = ffs.sfont.name
+    exp = /GeneralUser-GS.sf2$/
+    assert_match exp, ret
+
+    ret = ffs.sfont.sfid
+    exp = 1
+    assert_equal exp, ret
+
+    #
+    # ret = ffs.sfont.presets(debug_f: true).first.name
+    ret = ffs.sfont.presets(debug_f: false).first.name
+    exp = "Grand Piano"
+    assert_equal exp, ret
+
+    #
+    ret = ffs.sfont.preset(bknum: 0, prenum: 0).name
+    exp = "Grand Piano"
+    assert_equal exp, ret
+
+    ret = ffs.sfont.preset(bknum: 100, prenum: 100)
+    exp = nil
+    assert_equal exp, ret
+
+
+    ffs.delete
+  end
+
+  #
+  #
+  #
+  test "SoundFont  - #each_preset" do
     ffs = FiddleFluidSynth.new(soundfont_name: 'GeneralUser-GS.sf2')
 
     ret = ffs.object.soundfont.name
@@ -264,7 +302,7 @@ class FiddleFluidSynth::SoundFontTest
 
     #
     tmp_ary = []
-    ffs.object.soundfont.each_preset{|preset|
+    ffs.object.soundfont.each_preset(debug_f: false){|preset|
       # tmp_ary << preset.name
       _name = ffs.preset_get_name(preset)
       tmp_ary << _name

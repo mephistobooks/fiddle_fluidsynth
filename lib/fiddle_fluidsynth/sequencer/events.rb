@@ -231,7 +231,11 @@ class FiddleFluidSynth
     #
     def event_new()
       ret = C.new_fluid_event()
-      ret.extend(EventIF)
+      if ret.nil? || ret.null?
+        ret = nil
+      else
+        ret.extend(EventIF)
+      end
       ret
     end
 

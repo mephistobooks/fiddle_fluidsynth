@@ -2,10 +2,13 @@
 #
 #
 
-# List all presets of SoundFont files with bank and preset number.
-# (SoundFont instance's `#each_preset` test program)
+# presets-each.rb  - list all presets of SoundFont files with
+# bank and preset number.
+# (SoundFont instance's `#each_preset` example)
 #
+# This code is in the public domain.
 #
+# [YAMAMOTO, Masayuki]
 
 require_relative '../lib/fiddle_fluidsynth'
 #require 'fiddle_fluidsynth'
@@ -29,16 +32,10 @@ fs.start
 puts "sfid_ary: #{fs.sfid_ary}"
 
 #
-# sfcount = fs.object.soundfont.count
-# fs.sfid_ary.each_with_index do |sfid, _i|
 sfcount = fs.sfonts.size
 fs.sfonts.each_with_index do |sfont, _i|
 
   #
-  # puts "owner: #{fs.object.soundfont(sfid).method(:itself).owner}"
-  # sfont = fs.object.soundfont(sfid).itself
-  # name  = fs.object.soundfont(sfid).name
-  # sfont = fs.sfonts[_i]
   sfid  = sfont.sfid
   name  = sfont.name
 
@@ -47,7 +44,6 @@ fs.sfonts.each_with_index do |sfont, _i|
     " (sfont instance addr: 0x#{sfont.to_i.to_s(16)}:#{sfont.class})"
 
   #
-  # fs.object.soundfont(sfid).each_preset do |_preset|
   sfont.each_preset do |_preset|
     name    = _preset.name
     prenum  = _preset.num

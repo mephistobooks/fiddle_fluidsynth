@@ -162,7 +162,7 @@ class FiddleFluidSynth
 end
 
 
-# Lifecycle Functions.
+#
 #
 #
 class FiddleFluidSynth
@@ -171,14 +171,26 @@ class FiddleFluidSynth
     module Settings; end
   end
 
+end
+
+
+# Lifecycle Functions.
+#
+#
+class FiddleFluidSynth
+
   #
   # ==== See Also
-  # - #synth_get_settings()
+  # - `#synth_get_settings()`
   #
   def self.settings_new()
     ret = C.new_fluid_settings()
-    ret.extend(Interface::Settings)
 
+    if ret.nil? || ret.null?
+      ret = nil
+    else
+      ret.extend(Interface::Settings)
+    end
     ret
   end
   def settings_new()
@@ -430,9 +442,17 @@ class FiddleFluidSynth
   ### synth...?
 
   #
+  # ==== See Also
+  # - `#settings_new()`
+  #
   def self.synth_get_settings( synth )
     ret = C.fluid_synth_get_settings(synth)
-    ret.extend(FiddleFluidSynth::Interface::Settings)
+
+    if ret.nil? || ret.null?
+      ret = nil
+    else
+      ret.extend(FiddleFluidSynth::Interface::Settings)
+    end
     ret
   end
   def synth_get_settings( synth = self.synth )

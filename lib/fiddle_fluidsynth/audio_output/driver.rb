@@ -49,6 +49,7 @@ end
 class FiddleFluidSynth
 
   # Create a new audio driver.
+  #
   def self.audio_driver_new( synth: , settings: )
     ret = C.new_fluid_audio_driver(settings, synth)
     # ret.extend(Interface::AudioOutputDriver)

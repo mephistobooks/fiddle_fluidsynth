@@ -2,7 +2,7 @@
 #
 #
 
-# Fiddle::Pointer read/write test.
+# Fiddle::Pointer read/write example.
 #
 #
 require_relative "#{__dir__}/../lib/fiddle-fluidsynth"

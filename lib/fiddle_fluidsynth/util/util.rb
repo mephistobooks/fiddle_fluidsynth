@@ -348,9 +348,9 @@ class FiddleFluidSynth
     }
     ret
   end
-  def sfont
+  def sfont( debug_f: false )
     ret = self.sfonts.first
-    $stderr.puts "{#{__method__}} ret: #{ret.class}"
+    $stderr.puts "{#{__method__}} ret: #{ret.class}" if debug_f
     ret
   end
 end

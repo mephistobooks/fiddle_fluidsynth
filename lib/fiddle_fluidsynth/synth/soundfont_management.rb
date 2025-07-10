@@ -95,22 +95,49 @@ class FiddleFluidSynth
     ret
   end
 
+  #
+  # ==== See Also
+  # - soundfonts/loader.rb/`.#sfont_new()`
+  #
   def synth_get_sfont( synth=self.synth, num: )
     ret = C.fluid_synth_get_sfont(synth, num)
-    ret.extend(Interface::SoundFont)
+    # ret.extend(Interface::SoundFont)
+    if ret.nil? || ret.null?
+      ret = nil
+    else
+      ret.extend(Interface::SoundFont)
+    end
     ret
   end
 
+  #
+  # ==== See Also
+  # - soundfonts/loader.rb/`.#sfont_new()`
+  #
   # def synth_get_sfont_by_id( synth: , id: )
   def synth_get_sfont_by_id( synth=self.synth, id: )
     ret = C.fluid_synth_get_sfont_by_id(synth, id)
-    ret.extend(Interface::SoundFont)
+    # ret.extend(Interface::SoundFont)
+    if ret.nil? || ret.null?
+      ret = nil
+    else
+      ret.extend(Interface::SoundFont)
+    end
     ret
   end
 
+  #
+  # ==== See Also
+  # - soundfonts/loader.rb/`.#sfont_new()`
+  #
   def synth_get_sfont_by_name( synth=self.synth, name: )
     ret = C.fluid_synth_get_sfont_by_name(synth, name)
-    ret.extend(Interface::SoundFont)
+    # ret.extend(Interface::SoundFont)
+    if ret.nil? || ret.null?
+      ret = nil
+    else
+      ret.extend(Interface::SoundFont)
+    end
     ret
   end
 

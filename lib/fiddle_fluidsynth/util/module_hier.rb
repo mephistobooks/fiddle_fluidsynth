@@ -196,14 +196,14 @@ class FiddleFluidSynth::ModuleBase
     attr_reader   :map_preset
 
     # def value( _sfid = self.sfid )
-    def value()
+    def value( debug_f: false )
       _sfid = self.sfid
       # ret = self.fluidsynth_instance.sfonts[_sfid-1]
       # ret = self.fluidsynth_instance.synth_get_sfont_by_id(_sfid)
       idx = self.fluidsynth_instance.sfid_ary.index(_sfid)
       ret = self.fluidsynth_instance.sfonts[idx]
       $stderr.puts "{#{self.class}##{__method__}} _sfid: #{_sfid}," +
-        " 0x#{ret.to_i.to_s(16)}:#{ret.class}"
+        " 0x#{ret.to_i.to_s(16)}:#{ret.class}" if debug_f
       ret
     end
 
@@ -260,14 +260,16 @@ class FiddleFluidSynth::ModuleBase
     # ==== See Also
     # - fluidsynth_settings_foreach()
     #
-    def preset_iter( &blk )
+    def preset_iter( debug_f: false, &blk )
       sfont = self.value
       cnt = 0
       self.preset_iter_reset(sfont)
       preset = self.fluidsynth_instance.sfont_iteration_next(sfont)
       cnt += 1
 
-      while !(preset.null?)
+      #ng. while !(preset&.null?)
+      while !(preset.nil? || preset.null?)
+        $stderr.puts "cnt: #{cnt}: #{preset.inspect}" if debug_f
         blk.call(preset)
 
         preset = self.fluidsynth_instance.sfont_iteration_next(sfont)

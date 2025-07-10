@@ -194,12 +194,35 @@ class FiddleFluidSynth::SettingsTest
     assert_equal exp, ret
 
     #
-    ret = settings.val_of("audio.driver")
-    exp = "coreaudio"
+    ret = settings.val_of("synth.gain")
+    exp = 0.2
     assert_equal exp, ret
 
-    ret = settings.val_of("audio.period-size")
-    exp = 64
+    ret = settings.synth_gain
+    exp = 0.2
+    assert_equal exp, ret
+
+    ###  set.
+    # by `#set_value()`
+    settings.set_val('synth.gain', 3.14)
+
+    ret = settings.val_of('synth.gain')
+    exp = 3.14
+    assert_equal exp, ret
+
+    ret = settings.synth_gain
+    exp = 3.14
+    assert_equal exp, ret
+
+    # set by `#synth_gain=`
+    settings.synth_gain=0.4
+
+    ret = settings.val_of('synth.gain')
+    exp = 0.4
+    assert_equal exp, ret
+
+    ret = settings.synth_gain
+    exp = 0.4
     assert_equal exp, ret
 
 

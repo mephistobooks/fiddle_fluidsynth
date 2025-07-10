@@ -11,8 +11,8 @@
 #
 
 #
-require_relative '../lib/fiddle_fluidsynth'
-#require 'fiddle_fluidsynth'
+#require_relative '../lib/fiddle_fluidsynth'
+require 'fiddle_fluidsynth'
 
 
 #

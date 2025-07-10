@@ -67,9 +67,6 @@ class FiddleFluidSynth
     # TODO. in args.?
     #
     #
-    # self.settings_setnum(name: 'synth.gain',          val: gain)
-    # self.settings_setnum(name: 'synth.sample-rate',   val: samplerate)
-    # self.settings_setint(name: 'synth.midi-channels', val: midi_channels)
     self.settings.
       synth_gain           = gain           unless gain.nil?
     self.settings.

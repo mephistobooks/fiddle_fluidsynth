@@ -4,7 +4,7 @@
 #
 
 # ffs_midiplay.rb  - fiddle_fluidsynth MIDI file player (tick callback
-# test program).
+# example).
 # This code is in the public domain.
 #
 # [YAMAMOTO, Masayuki]
@@ -65,7 +65,7 @@ puts "#{time_start}: Playing #{f_midi}"
 # we can pass user_data via handler_data as follows, but this is completely
 # meaningless in FiddleFluidSynth.
 #
-# because we use closure to define the callback function, i.e.,
+# because we use the closure to define the callback function, i.e.,
 # we can use any variables in the callback freely.
 #
 # ```

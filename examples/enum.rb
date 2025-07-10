@@ -27,6 +27,4 @@ FiddleFluidSynth.constants.grep(/^Enum/).sort.each_with_index do |_enum, _i|
 end
 
 
-
-
 #### end.

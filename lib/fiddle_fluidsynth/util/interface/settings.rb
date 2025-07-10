@@ -289,15 +289,29 @@ class FiddleFluidSynth
     end
 
     #
-    def value_of( name )
+    def get_value_of( name )
       meth_name = self.item_to_meth_name(name)
       ret = self.send(meth_name)
       ret
     end
-    alias val_of  value_of
-    alias value   value_of
-    alias val     value_of
-    alias get     value_of
+    alias get_val_of  get_value_of
+    alias get_val     get_value_of
+    alias get_value   get_value_of
+    alias value_of    get_value_of
+    alias val_of      get_value_of
+    alias value       get_value_of
+    alias val         get_value_of
+
+    def set_value_of( name, value )
+      meth_name = self.item_to_meth_name(name)
+      setter_name = meth_name + "="
+      ret = self.send(setter_name, value)
+      ret
+    end
+    alias set_val_of  set_value_of
+    alias set_value   set_value_of
+    alias set_val     set_value_of
+
 
   end
 end
