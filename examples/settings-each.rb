@@ -30,7 +30,8 @@ fs.settings.each_setting{|data, name, type|
   #
   # $stderr.puts "{each_setting} data: #{data.null?}," +
   #   " name: #{name}, type: #{type}"
-  puts "item (#{item_cnt}): \"#{name}\", type: #{type}"
+  puts "item (#{item_cnt}): \"#{name}\", type: #{type}" +
+    ", realtime?: #{fs.settings.is_realtime?(name)}"
 
   #
   mname = FiddleFluidSynth.settings_item_to_meth_name(name)

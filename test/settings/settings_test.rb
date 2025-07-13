@@ -304,6 +304,10 @@ class FiddleFluidSynth::SettingsTest
   test "Settings  - #is_realtime?" do
     ffs = FFS.new
 
+    ret = ffs.settings.is_realtime?('synth.gain')
+    exp = true
+    assert_equal exp, ret
+
     ret = ffs.settings.is_realtime?('player.reset-synth')
     exp = true
     assert_equal exp, ret
